@@ -75,4 +75,6 @@ config:
   topology.metrics.consumer.register:
      - class: "org.apache.storm.metric.LoggingMetricsConsumer"
        parallelism.hint: 1
+     - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
+       parallelism.hint: 1
 
