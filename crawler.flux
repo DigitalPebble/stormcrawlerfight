@@ -9,6 +9,10 @@ includes:
       file: "crawler-conf.yaml"
       override: true
 
+    - resource: false
+      file: "es-conf.yaml"
+      override: true
+
 spouts:
   - id: "spout"
     className: "com.digitalpebble.stormcrawler.cassandra.CassandraSpout"
@@ -28,7 +32,7 @@ bolts:
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 1
   - id: "index"
-    className: "com.digitalpebble.stormcrawler.indexing.StdOutIndexer"
+    className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
     parallelism: 1
   - id: "status"
     className: "com.digitalpebble.stormcrawler.cassandra.CassandraStatusUpdater"
