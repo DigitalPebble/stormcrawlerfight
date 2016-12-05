@@ -30,7 +30,7 @@ bolts:
     parallelism: 1
   - id: "parse"
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
-    parallelism: 1
+    parallelism: 3
   - id: "index"
     className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
     parallelism: 1

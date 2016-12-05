@@ -42,7 +42,7 @@ config:
   es.status.ttl.purgatory: 5
   
   # Min time (in msecs) to allow between 2 successive queries to ES
-  es.status.min.delay.queries: 2500
+  es.status.min.delay.queries: 2000
   
   # ElasticSearchSpout
   # ES Spout throttling. Uses configuration of URLPartitionerBolt for the bucket key.
@@ -52,7 +52,7 @@ config:
   es.status.max.secs.date: 100
   
   # AggregationSpout
-  es.status.max.buckets: 25
+  es.status.max.buckets: 100
   es.status.max.urls.per.bucket: 2
   # field to group the URLs into buckets
   es.status.bucket.field: "_routing"

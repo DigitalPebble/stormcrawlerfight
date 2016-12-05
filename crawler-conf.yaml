@@ -10,7 +10,7 @@ config:
   topology.max.spout.pending: 100
   topology.debug: false
 
-  fetcher.threads.number: 50
+  fetcher.threads.number: 500
 
   # mandatory when using Flux
   topology.kryo.register:
@@ -47,7 +47,7 @@ config:
 
   # revisit a page daily (value in minutes)
   # set it to -1 to never refetch a page
-  fetchInterval.default: 1440
+  fetchInterval.default: -1
 
   # revisit a page with a fetch error after 2 hours (value in minutes)
   # set it to -1 to never refetch a page
