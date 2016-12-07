@@ -34,7 +34,7 @@ config:
   es.status.doc.type: "status"
   es.status.routing: true
   es.status.routing.fieldname: "metadata.hostname"
-  es.status.bulkActions: 100
+  es.status.bulkActions: 200
   es.status.concurrentRequests: 5
   es.status.flushInterval: "5s"
   

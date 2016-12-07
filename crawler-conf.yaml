@@ -10,6 +10,8 @@ config:
   topology.max.spout.pending: 100
   topology.debug: false
 
+  worker.heap.memory.mb: 2048
+
   fetcher.threads.number: 500
 
   # mandatory when using Flux
