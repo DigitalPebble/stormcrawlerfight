@@ -10,7 +10,7 @@ config:
   topology.max.spout.pending: 100
   topology.debug: false
 
-  worker.heap.memory.mb: 2048
+  worker.heap.memory.mb: 4096
 
   fetcher.threads.number: 500
 
@@ -23,6 +23,9 @@ config:
   # these are also persisted for the parent document (see below)
   # metadata.transfer:
   # - customMetadataName
+
+  metadata.track.path: false
+  metadata.track.depth: false
 
   # lists the metadata to persist to storage
   # these are not transfered to the outlinks
@@ -78,8 +81,6 @@ config:
 
   # Metrics consumers:
   topology.metrics.consumer.register:
-     - class: "org.apache.storm.metric.LoggingMetricsConsumer"
-       parallelism.hint: 1
      - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
        parallelism.hint: 1
 
