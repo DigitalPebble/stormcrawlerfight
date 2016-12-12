@@ -26,7 +26,7 @@ curl -XPOST localhost:9200/status -d '
 					"match_mapping_type": "string",
 					"mapping": {
 						"type": "string",
-						"index": "not_analyzed"
+						"index": "no"
 					}
 				}
 			}],
