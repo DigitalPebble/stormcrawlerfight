@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<property>
+  <name>http.agent.name</name>
+  <value>DigitalPebble Crawler</value>
+</property>
+
+<property>
+  <name>http.agent.description</name>
+  <value>Web crawler from DigitalPebble</value>
+</property>
+
+<property>
+  <name>http.agent.url</name>
+  <value>http://digitalpebble.com/</value>
+</property>
+
+<property>
+  <name>http.agent.email</name>
+  <value>crawler@digitalpebble.com</value>
+</property>
+
+<property>
+  <name>db.ignore.external.links</name>
+  <value>true</value>
+</property>
+
+<property>
+  <name>db.ignore.external.links.mode</name>
+  <value>byDomain</value>
+</property>
+
+<property>
+  <name>db.max.outlinks.per.page</name>
+  <value>-1</value>
+</property>
+
+<property>
+  <name>generate.max.count</name>
+  <value>-1</value>
+  <description>The maximum number of urls in a single
+  fetchlist.  -1 if unlimited. The urls are counted according
+  to the value of the parameter generator.count.mode.
+  </description>
+</property>
+
+<property>
+  <name>fetcher.server.delay</name>
+  <value>1.0</value>
+  <description>The number of seconds the fetcher will delay between 
+   successive requests to the same server. Note that this might get
+   overridden by a Crawl-Delay from a robots.txt and is used ONLY if 
+   fetcher.threads.per.queue is set to 1.
+   </description>
+</property>
+
+<property>
+  <name>fetcher.threads.fetch</name>
+  <value>125</value>
+  <description>500/4 workers</description>
+</property>
+
+<property>
+  <name>plugin.includes</name>
+  <value>protocol-http|urlfilter-regex|parse-(html|tika)|index-(basic)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+</property>
+
+<property>
+  <name>elastic.host</name>
+  <value>localhost</value>
+</property>
+
+<property>
+  <name>elastic.port</name>
+  <value>9300</value>
+</property>
+
+<property>
+  <name>elastic.cluster</name>
+  <value>elasticsearch</value>
+</property>
+
+<property>
+  <name>elastic.index</name>
+  <value>nutch</value>
+</property>
+
+</configuration>
+
