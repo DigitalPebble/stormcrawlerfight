@@ -120,7 +120,7 @@ sizeFetchlist=`expr $numSlaves \* 50000`
 timeLimitFetch=180
 
 # num threads for fetching
-numThreads=125
+numThreads=500
 
 #############################################
 
@@ -135,7 +135,7 @@ fi
 
 # note that some of the options listed here could be set in the
 # corresponding hadoop site xml param file
-commonOptions="-D mapreduce.job.reduces=$numTasks -D mapred.child.java.opts=-Xmx1000m -D mapreduce.reduce.speculative=false -D mapreduce.map.speculative=false -D mapreduce.map.output.compress=true"
+commonOptions="-D mapred.child.java.opts=-Xmx2G  -D mapreduce.job.reduces=$numTasks -D mapreduce.reduce.speculative=false -D mapreduce.map.speculative=false -D mapreduce.map.output.compress=true"
 
  # check that hadoop can be found on the path
 if [ $mode = "distributed" ]; then
@@ -249,7 +249,7 @@ do
 
   if $INDEXFLAG; then
       echo "Indexing $SEGMENT to index"
-      __bin_nutch index $JAVA_PROPERTIES "$CRAWL_PATH"/crawldb "$CRAWL_PATH"/segments/$SEGMENT
+      __bin_nutch index $commonOptions -D mapreduce.job.user.classpath.first=true  $JAVA_PROPERTIES "$CRAWL_PATH"/crawldb "$CRAWL_PATH"/segments/$SEGMENT -noCommit
 
  #     echo "Cleaning up index if possible"
  #     __bin_nutch clean $JAVA_PROPERTIES "$CRAWL_PATH"/crawldb
