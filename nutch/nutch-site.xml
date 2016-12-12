@@ -67,7 +67,7 @@
 
 <property>
   <name>plugin.includes</name>
-  <value>protocol-http|urlfilter-regex|parse-(html|tika)|index-(basic)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+  <value>protocol-http|urlfilter-regex|parse-html|index-(basic)|indexer-elastic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
 </property>
 
 <property>
