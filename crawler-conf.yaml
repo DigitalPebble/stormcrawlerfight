@@ -36,11 +36,11 @@ config:
    - isSitemap
    - isFeed
 
-  http.agent.name: "Anonymous Coward"
-  http.agent.version: "1.0"
+  http.agent.name: "DigitalPebble Crawler"
+  http.agent.version: "1.2"
   http.agent.description: "A StormCrawler-based crawler"
-  http.agent.url: "http://someorganization.com/"
-  http.agent.email: "someone@someorganization.com"
+  http.agent.url: "http://digitalpebble.com/"
+  http.agent.email: "crawler@digitalpebble.com"
 
   # FetcherBolt queue dump : comment out to activate
   # if a file exists on the worker machine with the corresponding port number
@@ -77,7 +77,7 @@ config:
   - parse.title=title
   - parse.keywords=keywords
   - parse.description=description
-  - domain=domain
+  - host=host
 
   # Metrics consumers:
   topology.metrics.consumer.register:

@@ -4,32 +4,18 @@
       "class": "com.digitalpebble.stormcrawler.parse.filter.XPathFilter",
       "name": "XPathFilter",
       "params": {
-        "canonical": "//*[@rel=\"canonical\"]/@href",
-        "parse.description": [
-            "//*[@name=\"description\"]/@content",
-            "//*[@name=\"Description\"]/@content"
-         ],
         "parse.title": [
             "//TITLE",
             "//META[@name=\"title\"]/@content"
-         ],
-         "parse.keywords": "//META[@name=\"keywords\"]/@content"
+         ]
       }
-    },
-    {
-      "class": "com.digitalpebble.stormcrawler.parse.filter.ContentFilter",
-      "name": "ContentFilter",
-      "params": {
-        "pattern": "//DIV[@id=\"maincontent\"]",
-        "pattern2": "//DIV[@itemprop=\"articleBody\"]"
-       }
     },
     {
       "class": "com.digitalpebble.stormcrawler.parse.filter.DomainParseFilter",
       "name": "DomainParseFilter",
       "params": {
-        "key": "domain",
-        "byHost": false
+        "key": "host",
+        "byHost": true
        }
     }
   ]
