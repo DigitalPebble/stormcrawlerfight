@@ -57,13 +57,6 @@
       "params": {
         "isSitemap": "false"
       }
-    },
-    {
-      "class": "com.digitalpebble.stormcrawler.filtering.robots.RobotsFilter",
-      "name": "RobotsFilter",
-      "params": {
-        "limitToSameHost": "true"
-      }
     }
   ]
 }
