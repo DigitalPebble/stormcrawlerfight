@@ -10,13 +10,13 @@ includes:
       override: true
 
     - resource: false
-      file: "es-conf.yaml"
+      file: "solr-conf.yaml"
       override: true
 
 spouts:
   - id: "spout"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.SamplerAggregationSpout"
-    parallelism: 32
+    className: "com.digitalpebble.stormcrawler.solr.persistence.SolrSpout"
+    parallelism: 1
 
 bolts:
   - id: "partitioner"
@@ -32,10 +32,10 @@ bolts:
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 4
   - id: "index"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
+    className: "com.digitalpebble.stormcrawler.solr.bolt.IndexerBolt"
     parallelism: 1
   - id: "status"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
+    className: "com.digitalpebble.stormcrawler.solr.persistence.StatusUpdaterBolt"
     parallelism: 1
 
 streams:

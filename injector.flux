@@ -10,7 +10,7 @@ includes:
       override: true
 
     - resource: false
-      file: "es-conf.yaml"
+      file: "solr-conf.yaml"
       override: true
 
 components:
@@ -30,7 +30,7 @@ spouts:
 
 bolts:
   - id: "status"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
+    className: "com.digitalpebble.stormcrawler.solr.persistence.StatusUpdaterBolt"
     parallelism: 1
 
 streams:
