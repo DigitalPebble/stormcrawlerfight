@@ -11,8 +11,8 @@ config:
   
   # Solr MetricsConsumer
   solr.metrics.url: "http://localhost:8983/solr/metrics"
-  solr.metrics.ttl: '1HOUR'
-  solr.metrics.ttl.field: 'timestamp'
+  # solr.metrics.ttl.field: '__ttl__'
+  # solr.metrics.ttl: '1HOUR'
 
   # For SolrCloud, use this settings instead of solr.indexer.url
   #
