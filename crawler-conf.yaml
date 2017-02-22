@@ -37,8 +37,8 @@ config:
    - isFeed
 
   http.agent.name: "DigitalPebble Crawler"
-  http.agent.version: "1.2"
-  http.agent.description: "A StormCrawler-based crawler"
+  http.agent.version: "1.4-SNAPSHOT"
+  http.agent.description: "StormCrawler Benchmark"
   http.agent.url: "http://digitalpebble.com/"
   http.agent.email: "crawler@digitalpebble.com"
 
@@ -78,6 +78,8 @@ config:
   - parse.keywords=keywords
   - parse.description=description
   - host=host
+
+  status.updater.cache.spec: "maximumSize=500000,expireAfterAccess=1h"
 
   # Metrics consumers:
   topology.metrics.consumer.register:
