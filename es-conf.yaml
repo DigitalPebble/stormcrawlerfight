@@ -33,8 +33,8 @@ config:
   # the routing is done on the value of 'partition.url.mode'
   es.status.routing: true
   # es.status.routing.fieldname: "metadata.hostname"
-  es.status.bulkActions: 200
-  es.status.concurrentRequests: 5
+  es.status.bulkActions: 500
+  es.status.concurrentRequests: 1
   es.status.flushInterval: "5s"
   es.status.settings:
     cluster.name: "elasticsearch"

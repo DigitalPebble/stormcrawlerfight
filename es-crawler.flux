@@ -36,7 +36,7 @@ bolts:
     parallelism: 1
   - id: "status"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
-    parallelism: 1
+    parallelism: 5
 
 streams:
   - from: "spout"
