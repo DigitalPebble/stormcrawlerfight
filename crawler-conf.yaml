@@ -53,6 +53,8 @@ config:
   sitemap.discovery: true
   sitemap.sniffContent: true
 
+  detect.charset.maxlength: 2048
+
   # revisit a page daily (value in minutes)
   # set it to -1 to never refetch a page
   fetchInterval.default: -1
