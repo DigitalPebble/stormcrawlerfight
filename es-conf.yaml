@@ -32,7 +32,7 @@ config:
   es.status.doc.type: "status"
   # the routing is done on the value of 'partition.url.mode'
   es.status.routing: true
-  # es.status.routing.fieldname: "metadata.hostname"
+  es.status.routing.fieldname: "metadata.hostname"
   es.status.bulkActions: 500
   es.status.concurrentRequests: 1
   es.status.flushInterval: "5s"
@@ -56,11 +56,14 @@ config:
   es.status.max.buckets: 100
   es.status.max.urls.per.bucket: 2
   # field to group the URLs into buckets
-  es.status.bucket.field: "_routing"
+  es.status.bucket.field: "metadata.hostname"
   # field to sort the URLs within a bucket
   es.status.bucket.sort.field: "nextFetchDate"
   # field to sort the buckets
   es.status.global.sort.field: "nextFetchDate"
+
+  # huge impact on perfs - need to check
+  # es.status.sample.size: 200
 
   topology.metrics.consumer.register:
        - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"

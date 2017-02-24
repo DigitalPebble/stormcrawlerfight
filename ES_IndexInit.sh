@@ -8,13 +8,13 @@ echo "Deleted status index"
 
 echo "Creating status index with mapping"
 
-curl -XPOST localhost:9200/status -d '
+curl -XPUT localhost:9200/status -d '
 {
 	"settings": {
 		"index": {
 			"number_of_shards": 32,
 			"number_of_replicas": 0,
-			"refresh_interval" : "5s"
+			"refresh_interval": "5s"
 		}
 	},
 	"mappings": {
@@ -24,8 +24,7 @@ curl -XPOST localhost:9200/status -d '
 					"path_match": "metadata.*",
 					"match_mapping_type": "string",
 					"mapping": {
-						"type": "string",
-						"index": "no"
+						"type": "keyword"
 					}
 				}
 			}],
@@ -41,12 +40,10 @@ curl -XPOST localhost:9200/status -d '
 					"format": "dateOptionalTime"
 				},
 				"status": {
-					"type": "string",
-					"index": "not_analyzed"
+					"type": "keyword"
 				},
 				"url": {
-					"type": "string",
-					"index": "not_analyzed"
+					"type": "keyword"
 				}
 			}
 		}
@@ -79,19 +76,16 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
       "_source":         { "enabled": true },
       "properties": {
           "name": {
-            "type": "string",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "srcComponentId": {
-            "type": "string",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "srcTaskId": {
             "type": "long"
           },
           "srcWorkerHost": {
-            "type": "string",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "srcWorkerPort": {
             "type": "long"
