@@ -14,6 +14,9 @@ config:
 
   fetcher.threads.number: 500
 
+  # set to 50MB to handle sitemaps
+  http.content.limit: 52428800
+
   # mandatory when using Flux
   topology.kryo.register:
     - com.digitalpebble.stormcrawler.Metadata

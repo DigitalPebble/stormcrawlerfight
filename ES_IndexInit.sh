@@ -12,9 +12,9 @@ curl -XPUT localhost:9200/status -d '
 {
 	"settings": {
 		"index": {
-			"number_of_shards": 32,
+			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval": "5s"
+			"refresh_interval": "10s"
 		}
 	},
 	"mappings": {
@@ -102,5 +102,51 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
   }
 }'
 
+# deletes and recreates a doc index with a bespoke schema
+
+curl -s -XDELETE 'http://localhost:9200/index/' >  /dev/null
+
 echo ""
+echo "Deleted docs index"
+
+echo "Creating docs index with mapping"
+
+curl -s -XPUT localhost:9200/index -d '
+{
+	"settings": {
+		"index": {
+			"number_of_shards": 5,
+			"number_of_replicas": 1,
+			"refresh_interval": "60s"
+		}
+	},
+	"mappings": {
+		"doc": {
+			"_source": {
+				"enabled": false
+			},
+			"_all": {
+				"enabled": false
+			},
+			"properties": {
+				"content": {
+					"type": "text",
+					"index": "true"
+				},
+				"host": {
+					"type": "keyword",
+					"index": "true"
+				},
+				"title": {
+					"type": "text",
+					"index": "true"
+				},
+				"url": {
+					"type": "keyword",
+					"index": "false"
+				}
+			}
+		}
+	}
+}'
 
