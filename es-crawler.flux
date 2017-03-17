@@ -16,7 +16,7 @@ includes:
 spouts:
   - id: "spout"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.SamplerAggregationSpout"
-    parallelism: 32
+    parallelism: 10
 
 bolts:
   - id: "partitioner"
@@ -36,7 +36,7 @@ bolts:
     parallelism: 1
   - id: "status"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
-    parallelism: 5
+    parallelism: 4
 
 streams:
   - from: "spout"
