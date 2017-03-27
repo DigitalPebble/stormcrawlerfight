@@ -14,7 +14,7 @@ curl -XPUT localhost:9200/status -d '
 		"index": {
 			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval": "10s"
+			"refresh_interval": "30s"
 		}
 	},
 	"mappings": {
@@ -66,7 +66,7 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
   "settings": {
     "index": {
       "number_of_shards": 1,
-      "refresh_interval": "5s"
+      "refresh_interval": "30s"
     },
     "number_of_replicas" : 0
   },
@@ -135,15 +135,18 @@ curl -s -XPUT localhost:9200/index -d '
 				},
 				"host": {
 					"type": "keyword",
-					"index": "true"
+					"index": "true",
+					"store": true
 				},
 				"title": {
 					"type": "text",
-					"index": "true"
+					"index": "true",
+					"store": true
 				},
 				"url": {
 					"type": "keyword",
-					"index": "false"
+					"index": "false",
+					"store": true
 				}
 			}
 		}
