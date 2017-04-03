@@ -14,7 +14,7 @@ curl -XPUT localhost:9200/status -d '
 		"index": {
 			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval": "30s"
+			"refresh_interval": "5s"
 		}
 	},
 	"mappings": {
