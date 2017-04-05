@@ -44,14 +44,7 @@ config:
   
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
-  
-  # ElasticSearchSpout
-  # ES Spout throttling. Uses the value of 'partition.url.mode' for the bucket key.
-  es.status.max.inflight.urls.per.bucket: -1
-  es.status.sort.field: "nextFetchDate"
-  # limits the deep paging by resetting the start offset for the ES query 
-  es.status.max.secs.date: 100
-  
+   
   # AggregationSpout
   es.status.max.buckets: 250
   es.status.max.urls.per.bucket: 4
@@ -62,8 +55,11 @@ config:
   # field to sort the buckets
   es.status.global.sort.field: "nextFetchDate"
 
-  # huge impact on perfs - need to check
-  # es.status.sample.size: 200
+  # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
+  es.status.max.secs.date: 100
+  
+  # AggregationSpout : sampling improves the performance on large crawls
+  es.status.sample: false
 
   topology.metrics.consumer.register:
        - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
