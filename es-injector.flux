@@ -7,11 +7,11 @@ includes:
 
     - resource: false
       file: "crawler-conf.yaml"
-      override: false
+      override: true
 
     - resource: false
       file: "es-conf.yaml"
-      override: false
+      override: true
 
 config:
     es.status.bulkActions: 100
