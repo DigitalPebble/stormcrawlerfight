@@ -32,15 +32,21 @@ config:
   es.status.doc.type: "status"
   # the routing is done on the value of 'partition.url.mode'
   es.status.routing: true
+  # stores the value used for the routing as a separate field
+  # needed by the spout implementations
   es.status.routing.fieldname: "metadata.hostname"
   es.status.bulkActions: 500
-  es.status.concurrentRequests: 1
   es.status.flushInterval: "5s"
+  es.status.concurrentRequests: 1
   es.status.settings:
     cluster.name: "elasticsearch"
   
-  # used by spouts - time in secs for which the URLs will be considered for fetching after a ack of fail
-  es.status.ttl.purgatory: 10
+  ################
+  # spout config #
+  ################
+
+  # time in secs for which the URLs will be considered for fetching after a ack of fail
+  es.status.ttl.purgatory: 30
   
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
@@ -54,9 +60,9 @@ config:
   es.status.bucket.sort.field: "nextFetchDate"
   # field to sort the buckets
   es.status.global.sort.field: "nextFetchDate"
-
+  
   # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
-  es.status.max.secs.date: 100
+  es.status.max.start.offset: 500
   
   # AggregationSpout : sampling improves the performance on large crawls
   es.status.sample: true
