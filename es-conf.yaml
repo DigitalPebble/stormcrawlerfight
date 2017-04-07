@@ -40,7 +40,7 @@ config:
     cluster.name: "elasticsearch"
   
   # used by spouts - time in secs for which the URLs will be considered for fetching after a ack of fail
-  es.status.ttl.purgatory: 5
+  es.status.ttl.purgatory: 10
   
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
@@ -59,7 +59,7 @@ config:
   es.status.max.secs.date: 100
   
   # AggregationSpout : sampling improves the performance on large crawls
-  es.status.sample: false
+  es.status.sample: true
 
   topology.metrics.consumer.register:
        - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
