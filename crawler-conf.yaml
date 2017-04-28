@@ -30,7 +30,7 @@ config:
   # - customMetadataName
 
   metadata.track.path: false
-  metadata.track.depth: false
+  metadata.track.depth: true
 
   # lists the metadata to persist to storage
   # these are not transfered to the outlinks

@@ -16,16 +16,6 @@ config:
   es.metrics.settings:
     cluster.name: "elasticsearch"
   
-  # ES metrics whitelist. Only metrics in this list will be written to ES
-  # es.metrics.whitelist:
-  # - fetcher_counter
-  # - fetcher_average.bytes_fetched
-  
-  # ES metrics blacklist. Never write these metrics to ES
-  # es.metrics.blacklist:
-  # - __receive.capacity
-  # - __receive.read_pos
-  
   # ES spout and persistence bolt
   es.status.addresses: "localhost:9300"
   es.status.index.name: "status"
@@ -51,7 +41,6 @@ config:
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
    
-  # AggregationSpout
   es.status.max.buckets: 250
   es.status.max.urls.per.bucket: 4
   # field to group the URLs into buckets
@@ -66,7 +55,15 @@ config:
   
   # AggregationSpout : sampling improves the performance on large crawls
   es.status.sample: true
+  
+  # es.status.recentDate.increase: 10
+  # es.status.recentDate.min.gap: 2
 
   topology.metrics.consumer.register:
        - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
          parallelism.hint: 1
+         #whitelist:
+         #  - "fetcher_counter"
+         #  - "fetcher_average.bytes_fetched"
+         #blacklist:
+         #  - "__receive.*"
