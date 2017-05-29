@@ -1,21 +1,20 @@
 # deletes and recreates a status index with a bespoke schema
 
-echo "Deleting status index   "
+curl -s -XDELETE 'http://localhost:9200/status/' >  /dev/null
 
-curl -XDELETE 'http://localhost:9200/status/'
+echo "Deleted status index"
 
 # http://localhost:9200/status/_mapping/status?pretty
 
-echo ""
-echo "Creating status index   "
+echo "Creating status index with mapping"
 
-curl -XPOST localhost:9200/status -d '
+curl -XPUT localhost:9200/status -d '
 {
 	"settings": {
 		"index": {
-			"number_of_shards": 32,
+			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval" : "5s"
+			"refresh_interval": "5s"
 		}
 	},
 	"mappings": {
@@ -25,8 +24,7 @@ curl -XPOST localhost:9200/status -d '
 					"path_match": "metadata.*",
 					"match_mapping_type": "string",
 					"mapping": {
-						"type": "string",
-						"index": "no"
+						"type": "keyword"
 					}
 				}
 			}],
@@ -42,12 +40,10 @@ curl -XPOST localhost:9200/status -d '
 					"format": "dateOptionalTime"
 				},
 				"status": {
-					"type": "string",
-					"index": "not_analyzed"
+					"type": "keyword"
 				},
 				"url": {
-					"type": "string",
-					"index": "not_analyzed"
+					"type": "keyword"
 				}
 			}
 		}
@@ -56,22 +52,21 @@ curl -XPOST localhost:9200/status -d '
 
 # deletes and recreates a status index with a bespoke schema
 
-echo ""
-echo "Deleting metrics index   "
-
-curl -XDELETE 'http://localhost:9200/metrics/'
+curl -s -XDELETE 'http://localhost:9200/metrics*/' >  /dev/null
 
 echo ""
-echo "Creating metrics index"
+echo "Deleted metrics index"
+
+echo "Creating metrics index with mapping"
 
 # http://localhost:9200/metrics/_mapping/status?pretty
-curl -XPOST localhost:9200/_template/storm-metrics-template -d '
+curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
 {
   "template": "metrics*",
   "settings": {
     "index": {
       "number_of_shards": 1,
-      "refresh_interval": "5s"
+      "refresh_interval": "30s"
     },
     "number_of_replicas" : 0
   },
@@ -81,19 +76,16 @@ curl -XPOST localhost:9200/_template/storm-metrics-template -d '
       "_source":         { "enabled": true },
       "properties": {
           "name": {
-            "type": "string",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "srcComponentId": {
-            "type": "string",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "srcTaskId": {
             "type": "long"
           },
           "srcWorkerHost": {
-            "type": "string",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "srcWorkerPort": {
             "type": "long"
@@ -108,5 +100,56 @@ curl -XPOST localhost:9200/_template/storm-metrics-template -d '
       }
     }
   }
+}'
+
+# deletes and recreates a doc index with a bespoke schema
+
+curl -s -XDELETE 'http://localhost:9200/index/' >  /dev/null
+
+echo ""
+echo "Deleted docs index"
+
+echo "Creating docs index with mapping"
+
+curl -s -XPUT localhost:9200/index -d '
+{
+	"settings": {
+		"index": {
+			"number_of_shards": 5,
+			"number_of_replicas": 1,
+			"refresh_interval": "60s"
+		}
+	},
+	"mappings": {
+		"doc": {
+			"_source": {
+				"enabled": false
+			},
+			"_all": {
+				"enabled": false
+			},
+			"properties": {
+				"content": {
+					"type": "text",
+					"index": "true"
+				},
+				"host": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"title": {
+					"type": "text",
+					"index": "true",
+					"store": true
+				},
+				"url": {
+					"type": "keyword",
+					"index": "false",
+					"store": true
+				}
+			}
+		}
+	}
 }'
 

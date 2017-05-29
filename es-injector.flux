@@ -13,6 +13,9 @@ includes:
       file: "es-conf.yaml"
       override: true
 
+config:
+    es.status.bulkActions: 100
+
 components:
   - id: "scheme"
     className: "com.digitalpebble.stormcrawler.util.StringTabScheme"
@@ -25,7 +28,7 @@ spouts:
     parallelism: 1
     constructorArgs:
       - "."
-      - "top1K2016.txt"
+      - "top-1m-opendns.txt"
       - ref: "scheme"
 
 bolts:

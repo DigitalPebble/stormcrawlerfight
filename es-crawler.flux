@@ -15,8 +15,8 @@ includes:
 
 spouts:
   - id: "spout"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.SamplerAggregationSpout"
-    parallelism: 32
+    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.AggregationSpout"
+    parallelism: 10
 
 bolts:
   - id: "partitioner"
@@ -30,12 +30,15 @@ bolts:
     parallelism: 1
   - id: "parse"
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
-    parallelism: 4
+    parallelism: 5
   - id: "index"
     className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
     parallelism: 1
   - id: "status"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
+    parallelism: 4
+  - id: "status_metrics"
+    className: "com.digitalpebble.stormcrawler.elasticsearch.metrics.StatusMetricsBolt"
     parallelism: 1
 
 streams:
@@ -43,6 +46,11 @@ streams:
     to: "partitioner"
     grouping:
       type: SHUFFLE
+
+  - from: "spout"
+    to: "status_metrics"
+    grouping:
+      type: SHUFFLE     
 
   - from: "partitioner"
     to: "fetcher"
