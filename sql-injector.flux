@@ -10,7 +10,7 @@ includes:
       override: true
 
     - resource: false
-      file: "es-conf.yaml"
+      file: "sql-conf.yaml"
       override: true
 
     - resource: false
@@ -34,8 +34,10 @@ spouts:
 
 bolts:
   - id: "status"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
+    className: "com.digitalpebble.stormcrawler.sql.StatusUpdaterBolt"
     parallelism: 1
+    constructorArgs:
+      - 128 
 
 streams:
   - from: "spout"

@@ -1,0 +1,7 @@
+config:
+  mysql.url: "jdbc:mysql://localhost:3306/crawl"
+  mysql.table: "urls"
+  mysql.user: "crawler"
+  mysql.password: "storm"
+  mysql.buffer.size: 100
+  mysql.min.query.interval: 5000

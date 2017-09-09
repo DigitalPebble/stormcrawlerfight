@@ -14,7 +14,10 @@ curl -XPUT localhost:9200/status -d '
 		"index": {
 			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval": "5s"
+			"refresh_interval": "5s",
+			 "translog" : {
+			           "durability" : "async"
+				           }
 		}
 	},
 	"mappings": {
@@ -116,7 +119,7 @@ curl -s -XPUT localhost:9200/index -d '
 	"settings": {
 		"index": {
 			"number_of_shards": 5,
-			"number_of_replicas": 1,
+			"number_of_replicas": 0,
 			"refresh_interval": "60s"
 		}
 	},

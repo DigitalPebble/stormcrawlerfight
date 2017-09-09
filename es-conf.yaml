@@ -42,7 +42,7 @@ config:
   es.status.min.delay.queries: 1000
    
   es.status.max.buckets: 250
-  es.status.max.urls.per.bucket: 4
+  es.status.max.urls.per.bucket: 1
   # field to group the URLs into buckets
   es.status.bucket.field: "metadata.hostname"
   # field to sort the URLs within a bucket
@@ -51,8 +51,10 @@ config:
   es.status.global.sort.field: "nextFetchDate"
   
   # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
-  es.status.max.start.offset: 500
-  
+  es.status.max.start.offset: 5000
+ 
+  es.status.reset.fetchdate.after: 120
+
   # AggregationSpout : sampling improves the performance on large crawls
   es.status.sample: true
   

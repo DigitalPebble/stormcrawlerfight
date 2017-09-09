@@ -42,15 +42,16 @@ config:
    - isFeed
 
   http.agent.name: "DigitalPebble Crawler"
-  http.agent.version: "1.4-SNAPSHOT"
+  http.agent.version: "1.6-SNAPSHOT"
   http.agent.description: "StormCrawler Benchmark"
   http.agent.url: "http://digitalpebble.com/"
   http.agent.email: "crawler@digitalpebble.com"
 
+
   # FetcherBolt queue dump : comment out to activate
   # if a file exists on the worker machine with the corresponding port number
   # the FetcherBolt will log the content of its internal queues to the logs
-  # fetcherbolt.queue.debug.filepath: "/tmp/fetcher-dump-{port}
+  fetcherbolt.queue.debug.filepath: "/tmp/fetcher-dump-{port}"
 
   parsefilters.config.file: "parsefilters.json"
   urlfilters.config.file: "urlfilters.json"
@@ -62,14 +63,14 @@ config:
 
   # revisit a page daily (value in minutes)
   # set it to -1 to never refetch a page
-  fetchInterval.default: -1
+  fetchInterval.default: 525600
 
   # revisit a page with a fetch error after 2 hours (value in minutes)
   # set it to -1 to never refetch a page
   fetchInterval.fetch.error: 120
 
   # never revisit a page with an error (or set a value in minutes)
-  fetchInterval.error: -1
+  fetchInterval.error: 525600
 
   # custom fetch interval to be used when a document has the key/value in its metadata
   # and has been fetched succesfully (value in minutes)
