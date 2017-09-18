@@ -13,8 +13,9 @@ includes:
       file: "es-conf.yaml"
       override: true
 
-config:
-    es.status.bulkActions: 100
+    - resource: false
+      file: "injection-conf.yaml"
+      override: true
 
 components:
   - id: "scheme"
