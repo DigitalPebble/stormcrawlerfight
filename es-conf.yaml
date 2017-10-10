@@ -50,6 +50,9 @@ config:
   # field to sort the buckets
   es.status.global.sort.field: "nextFetchDate"
   
+  # Delay since previous query date (in secs) after which the nextFetchDate value will be reset
+  es.status.reset.fetchdate.after: 300
+  
   # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
   es.status.max.start.offset: 500
   
