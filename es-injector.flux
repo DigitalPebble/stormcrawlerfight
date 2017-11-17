@@ -29,7 +29,7 @@ spouts:
     parallelism: 1
     constructorArgs:
       - "."
-      - "top-1m-opendns.txt"
+      - "top1K2016.txt"
       - ref: "scheme"
 
 bolts:

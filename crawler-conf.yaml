@@ -10,7 +10,10 @@ config:
   topology.max.spout.pending: 250
   topology.debug: false
 
-  worker.heap.memory.mb: 4096
+  topology.worker.childopts: "-Djava.net.preferIPv4Stack=true"
+
+  # does not seem to work?
+  # topology.worker.max.heap.size.mb: 2048.0
 
   fetcher.threads.number: 500
 
