@@ -102,12 +102,12 @@
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-core</artifactId>
-			<version>1.6</version>
+			<version>1.8-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
-			<artifactId>storm-crawler-elasticsearch</artifactId>
-			<version>1.6</version>
+			<artifactId>storm-crawler-solr</artifactId>
+			<version>1.8-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

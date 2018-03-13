@@ -10,11 +10,7 @@ includes:
       override: true
 
     - resource: false
-      file: "es-conf.yaml"
-      override: true
-
-    - resource: false
-      file: "injection-conf.yaml"
+      file: "solr-conf.yaml"
       override: true
 
 components:
@@ -29,12 +25,12 @@ spouts:
     parallelism: 1
     constructorArgs:
       - "."
-      - "top-1m-opendns.txt"
+      - "seeds.txt"
       - ref: "scheme"
 
 bolts:
   - id: "status"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
+    className: "com.digitalpebble.stormcrawler.solr.persistence.StatusUpdaterBolt"
     parallelism: 1
 
 streams:
