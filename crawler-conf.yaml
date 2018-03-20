@@ -45,10 +45,13 @@ config:
    - isFeed
 
   http.agent.name: "DigitalPebble Crawler"
-  http.agent.version: "1.4-SNAPSHOT"
+  http.agent.version: "1.8"
   http.agent.description: "StormCrawler Benchmark"
   http.agent.url: "http://digitalpebble.com/"
   http.agent.email: "crawler@digitalpebble.com"
+
+  http.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
+  https.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
 
   # FetcherBolt queue dump : comment out to activate
   # if a file exists on the worker machine with the corresponding port number
@@ -61,7 +64,7 @@ config:
   sitemap.discovery: true
   sitemap.sniffContent: true
 
-  detect.charset.maxlength: 2048
+  detect.charset.maxlength: 10000
 
   # revisit a page daily (value in minutes)
   # set it to -1 to never refetch a page
@@ -91,8 +94,4 @@ config:
 
   status.updater.cache.spec: "maximumSize=500000,expireAfterAccess=1h"
 
-  # Metrics consumers:
-  topology.metrics.consumer.register:
-     - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
-       parallelism.hint: 1
 

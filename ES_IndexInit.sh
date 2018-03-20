@@ -12,8 +12,6 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 {
 	"settings": {
 		"index": {
-            "sort.field": "nextFetchDate", 
-            "sort.order": "asc",
 			"number_of_shards": 10,
 			"number_of_replicas": 0,
 			"refresh_interval": "5s"
@@ -32,9 +30,6 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 			}],
 			"_source": {
 				"enabled": true
-			},
-			"_all": {
-				"enabled": false
 			},
 			"properties": {
 				"nextFetchDate": {
@@ -74,7 +69,6 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -H 'Content-Type:
   },
   "mappings": {
     "datapoint": {
-      "_all":            { "enabled": false },
       "_source":         { "enabled": true },
       "properties": {
           "name": {
@@ -125,9 +119,6 @@ curl -s -XPUT localhost:9200/index -H 'Content-Type: application/json' -d '
 	"mappings": {
 		"doc": {
 			"_source": {
-				"enabled": false
-			},
-			"_all": {
 				"enabled": false
 			},
 			"properties": {

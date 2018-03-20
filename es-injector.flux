@@ -29,7 +29,7 @@ spouts:
     parallelism: 1
     constructorArgs:
       - "."
-      - "top1K2016.txt"
+      - "seeds"
       - ref: "scheme"
 
 bolts:
@@ -41,5 +41,8 @@ streams:
   - from: "spout"
     to: "status"
     grouping:
-      type: FIELDS
-      args: ["url"]
+      type: CUSTOM
+      customClass:
+        className: "com.digitalpebble.stormcrawler.util.URLStreamGrouping"
+        constructorArgs:
+          - "byDomain"

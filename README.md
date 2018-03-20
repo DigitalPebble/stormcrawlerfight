@@ -1,6 +1,8 @@
 # stormcrawlerfight
 Benchmarking of StormCrawler with different versions, backends or alternative crawlers.
 
+Create a link named 'seeds' to the seeds file of your choice.
+
 With Storm installed, you can generate an uberjar:
 
 ``` sh
