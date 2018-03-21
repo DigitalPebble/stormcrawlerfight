@@ -32,7 +32,7 @@ bolts:
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 5
   - id: "index"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
+    className: "com.digitalpebble.stormcrawler.indexing.DummyIndexer"
     parallelism: 1
   - id: "status"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"

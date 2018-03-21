@@ -1,15 +1,6 @@
 # configuration for Elasticsearch resources
   
 config:
-  # ES indexer bolt
-  es.indexer.addresses: "localhost"
-  es.indexer.index.name: "index"
-  es.indexer.doc.type: "doc"
-  es.indexer.create: false
-  es.indexer.flushInterval: "1s"
-  es.indexer.settings:
-    cluster.name: "elasticsearch"
-  
   # ES metricsConsumer
   es.metrics.addresses: "localhost"
   es.metrics.index.name: "metrics"
