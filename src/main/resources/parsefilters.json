@@ -1,22 +1,4 @@
 {
   "com.digitalpebble.stormcrawler.parse.ParseFilters": [
-    {
-      "class": "com.digitalpebble.stormcrawler.parse.filter.XPathFilter",
-      "name": "XPathFilter",
-      "params": {
-        "parse.title": [
-            "//TITLE",
-            "//META[@name=\"title\"]/@content"
-         ]
-      }
-    },
-    {
-      "class": "com.digitalpebble.stormcrawler.parse.filter.DomainParseFilter",
-      "name": "DomainParseFilter",
-      "params": {
-        "key": "host",
-        "byHost": true
-       }
-    }
   ]
 }

@@ -12,7 +12,7 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 {
 	"settings": {
 		"index": {
-			"number_of_shards": 10,
+			"number_of_shards": 100,
 			"number_of_replicas": 0,
 			"refresh_interval": "5s"
 		}
