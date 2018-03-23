@@ -28,7 +28,7 @@ bolts:
   - id: "sitemap"
     className: "com.digitalpebble.stormcrawler.bolt.SiteMapParserBolt"
     parallelism: 1
-  - id: "feeds"
+  - id: "feed"
     className: "com.digitalpebble.stormcrawler.bolt.FeedParserBolt"
     parallelism: 1
   - id: "parse"
