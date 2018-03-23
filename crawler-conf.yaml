@@ -64,6 +64,8 @@ config:
   sitemap.discovery: true
   sitemap.sniffContent: true
 
+  feed.sniffContent: true
+
   detect.charset.maxlength: 10000
 
   # revisit a page daily (value in minutes)
