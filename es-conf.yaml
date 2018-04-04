@@ -16,7 +16,7 @@ config:
   es.status.routing: true
   # stores the value used for the routing as a separate field
   # needed by the spout implementations
-  es.status.routing.fieldname: "metadata.hostname"
+  es.status.routing.fieldname: "hostname"
   es.status.bulkActions: 500
   es.status.flushInterval: "1s"
   es.status.concurrentRequests: 5
@@ -36,7 +36,7 @@ config:
   es.status.max.buckets: 2500
   es.status.max.urls.per.bucket: 5
   # field to group the URLs into buckets
-  es.status.bucket.field: "metadata.hostname"
+  es.status.bucket.field: "hostname"
   # field to sort the URLs within a bucket
   es.status.bucket.sort.field: "nextFetchDate"
   # field to sort the buckets

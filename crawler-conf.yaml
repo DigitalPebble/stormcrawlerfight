@@ -5,7 +5,7 @@
 # This file does not contain all the key values but only the most frequently used ones. See crawler-default.xml for an extensive list.
 
 config: 
-  topology.workers: 1
+  topology.workers: 2
   topology.message.timeout.secs: 300
   topology.max.spout.pending: 1000
   topology.debug: false

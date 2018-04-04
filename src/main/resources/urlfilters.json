@@ -21,7 +21,7 @@
       "params": {
         "removeAnchorPart": true, 
         "unmangleQueryString": true,
-        "checkValidURI": true,
+        "checkValidURI": false,
         "removeHashes": false
       }
     },
@@ -55,7 +55,8 @@
       "class": "com.digitalpebble.stormcrawler.filtering.metadata.MetadataFilter",
       "name": "MetadataFilter",
       "params": {
-        "isSitemap": "false"
+        "isSitemap": "false",
+        "isSeed": "false"
       }
     }
   ]

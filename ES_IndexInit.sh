@@ -24,12 +24,17 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 					"path_match": "metadata.*",
 					"match_mapping_type": "string",
 					"mapping": {
-						"type": "keyword"
+						"type": "keyword",
+						"index": false,
+						"doc_values": false
 					}
 				}
 			}],
 			"_source": {
 				"enabled": true
+			},
+"_field_names": {
+				"enabled": false
 			},
 			"properties": {
 				"nextFetchDate": {
@@ -40,8 +45,13 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 					"type": "keyword"
 				},
 				"url": {
-					"type": "keyword"
-				}
+					"type": "keyword",
+					"index": false
+				},
+                                "hostname": {
+                                        "type": "keyword",
+                                        "index": true
+                                }
 			}
 		}
 	}
