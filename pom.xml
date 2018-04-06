@@ -79,6 +79,15 @@
 										<exclude>META-INF/*.RSA</exclude>
 									</excludes>
 								</filter>
+								<filter>
+									<!-- https://issues.apache.org/jira/browse/STORM-2428 -->
+									<artifact>org.apache.storm:flux-core</artifact>
+									<excludes>
+										<exclude>org/apache/commons/**</exclude>
+										<exclude>org/apache/http/**</exclude>
+										<exclude>org/yaml/**</exclude>
+									</excludes>
+								</filter>
 							</filters>
 						</configuration>
 					</execution>
@@ -97,7 +106,7 @@
 		<dependency>
 			<groupId>org.apache.storm</groupId>
 			<artifactId>flux-core</artifactId>
-			<version>1.0.2</version>
+			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
