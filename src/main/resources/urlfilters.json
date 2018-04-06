@@ -12,7 +12,7 @@
       "class": "com.digitalpebble.stormcrawler.filtering.depth.MaxDepthFilter",
       "name": "MaxDepthFilter",
       "params": {
-        "maxDepth": -1
+        "maxDepth": 5
       }
     },
     {
@@ -30,7 +30,7 @@
       "name": "HostURLFilter",
       "params": {
         "ignoreOutsideHost": false,
-        "ignoreOutsideDomain": true
+        "ignoreOutsideDomain": false
       }
     },
     {

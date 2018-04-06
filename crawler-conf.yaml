@@ -7,7 +7,7 @@
 config: 
   topology.workers: 2
   topology.message.timeout.secs: 300
-  topology.max.spout.pending: 1000
+  topology.max.spout.pending: 500
   topology.debug: false
 
   topology.worker.childopts: "-Djava.net.preferIPv4Stack=true"
@@ -52,6 +52,8 @@ config:
 
   http.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
   https.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
+
+  robots.cache.spec: "softValues,expireAfterWrite=6h"
 
   # FetcherBolt queue dump : comment out to activate
   # if a file exists on the worker machine with the corresponding port number
