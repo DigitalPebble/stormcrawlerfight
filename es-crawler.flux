@@ -18,6 +18,14 @@ spouts:
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.AggregationSpout"
     parallelism: 100
 
+  - id: "filespout"
+    className: "com.digitalpebble.stormcrawler.spout.FileSpout"
+    parallelism: 1
+    constructorArgs:
+      - "."
+      - "seeds"
+      - ref: "scheme"
+
 components:
   - id: "WARCFileNameFormat"
     className: "com.digitalpebble.stormcrawler.warc.WARCFileNameFormat"
@@ -29,8 +37,13 @@ components:
   - id: "rotationPolicy"
     className: "org.apache.storm.hdfs.bolt.rotation.FileSizeRotationPolicy"
     constructorArgs:
-      - 5.0
+      - 50.0
       - MB
+
+  - id: "scheme"
+    className: "com.digitalpebble.stormcrawler.util.StringTabScheme"
+    constructorArgs:
+      - DISCOVERED
 
 bolts:
   - id: "partitioner"
@@ -137,3 +150,12 @@ streams:
       type: FIELDS
       args: ["url"]
       streamId: "status"
+
+  - from: "filespout"
+    to: "status"
+    grouping:
+      type: CUSTOM
+      customClass:
+        className: "com.digitalpebble.stormcrawler.util.URLStreamGrouping"
+        constructorArgs:
+          - "byDomain"

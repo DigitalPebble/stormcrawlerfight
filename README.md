@@ -9,12 +9,6 @@ With Storm installed, you can generate an uberjar:
 mvn clean package
 ```
 
-and then use the following command to inject URLs into the topology
-
-``` sh
-storm jar target/storm-crawler-fight-2.0-SNAPSHOT.jar  org.apache.storm.flux.Flux --local es-injector.flux
-```
-
 then 
 
 ``` sh
