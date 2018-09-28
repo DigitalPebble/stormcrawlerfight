@@ -13,10 +13,6 @@ includes:
       file: "sql-conf.yaml"
       override: true
 
-    - resource: false
-      file: "inject-conf.yaml"
-      override: true
-
 components:
   - id: "scheme"
     className: "com.digitalpebble.stormcrawler.util.StringTabScheme"

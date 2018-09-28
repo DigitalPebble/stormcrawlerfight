@@ -42,7 +42,7 @@ config:
    - isFeed
 
   http.agent.name: "DigitalPebble Crawler"
-  http.agent.version: "1.6-SNAPSHOT"
+  http.agent.version: "1.11-SNAPSHOT"
   http.agent.description: "StormCrawler Benchmark"
   http.agent.url: "http://digitalpebble.com/"
   http.agent.email: "crawler@digitalpebble.com"
@@ -89,8 +89,4 @@ config:
 
   status.updater.cache.spec: "maximumSize=500000,expireAfterAccess=1h"
 
-  # Metrics consumers:
-  topology.metrics.consumer.register:
-     - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
-       parallelism.hint: 1
 

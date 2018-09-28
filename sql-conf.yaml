@@ -2,6 +2,13 @@ config:
   mysql.url: "jdbc:mysql://localhost:3306/crawl"
   mysql.table: "urls"
   mysql.user: "crawler"
-  mysql.password: "storm"
+  mysql.password: "crawler"
   mysql.buffer.size: 100
   mysql.min.query.interval: 5000
+  mysql.metrics.table: "metrics"
+  sql.update.batch.size: 250
+  
+  # Metrics consumers:
+  #topology.metrics.consumer.register:
+  #   - class: "com.digitalpebble.stormcrawler.sql.metrics.MetricsConsumer"
+  #     parallelism.hint: 1

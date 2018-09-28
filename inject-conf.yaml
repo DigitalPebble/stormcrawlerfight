@@ -1,2 +1,0 @@
-config:
-  es.status.bulkActions: 100

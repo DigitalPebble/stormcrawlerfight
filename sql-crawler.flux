@@ -10,17 +10,28 @@ includes:
       override: true
 
     - resource: false
-      file: "es-conf.yaml"
-      override: true
-
-    - resource: false
       file: "sql-conf.yaml"
       override: true
 
+
+components:
+  - id: "scheme"
+    className: "com.digitalpebble.stormcrawler.util.StringTabScheme"
+    constructorArgs:
+      - DISCOVERED
+
 spouts:
+  - id: "seeds"
+    className: "com.digitalpebble.stormcrawler.spout.FileSpout"
+    parallelism: 1
+    constructorArgs:
+      - "."
+      - "top1K2016.txt"
+      - ref: "scheme"
+
   - id: "spout"
     className: "com.digitalpebble.stormcrawler.sql.SQLSpout"
-    parallelism: 128
+    parallelism: 1
 
 bolts:
   - id: "partitioner"
@@ -36,13 +47,13 @@ bolts:
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 5
   - id: "index"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
+    className: "com.digitalpebble.stormcrawler.indexing.StdOutIndexer"
     parallelism: 1
   - id: "status"
     className: "com.digitalpebble.stormcrawler.sql.StatusUpdaterBolt"
     parallelism: 4
     constructorArgs:
-      - 128
+      - 1
 
 streams:
   - from: "spout"
@@ -98,3 +109,9 @@ streams:
       type: FIELDS
       args: ["url"]
       streamId: "status"
+
+  - from: "seeds"
+    to: "status"
+    grouping:
+      type: FIELDS
+      args: ["url"]
