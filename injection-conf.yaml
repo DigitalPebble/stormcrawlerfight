@@ -1,0 +1,4 @@
+# configuration for Elasticsearch resources
+  
+config:
+  es.status.bulkActions: 100
