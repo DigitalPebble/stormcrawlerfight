@@ -25,7 +25,7 @@ spouts:
     className: "com.digitalpebble.stormcrawler.spout.FileSpout"
     parallelism: 1
     constructorArgs:
-      - "."
+      - "/data/stormcrawlerfight/"
       - "top1K2016.txt"
       - ref: "scheme"
 
