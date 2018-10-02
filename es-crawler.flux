@@ -16,7 +16,7 @@ includes:
 spouts:
   - id: "spout"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.AggregationSpout"
-    parallelism: 100
+    parallelism: 10
 
   - id: "filespout"
     className: "com.digitalpebble.stormcrawler.spout.FileSpout"
@@ -32,7 +32,7 @@ components:
     configMethods:
       - name: "withPath"
         args:
-          - "/warc"
+          - "/tmp/warc"
 
   - id: "rotationPolicy"
     className: "org.apache.storm.hdfs.bolt.rotation.FileSizeRotationPolicy"
