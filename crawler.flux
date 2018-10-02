@@ -13,7 +13,23 @@ includes:
       file: "solr-conf.yaml"
       override: true
 
+
+
+components:
+  - id: "scheme"
+    className: "com.digitalpebble.stormcrawler.util.StringTabScheme"
+    constructorArgs:
+      - DISCOVERED
+
 spouts:
+  - id: "seeds"
+    className: "com.digitalpebble.stormcrawler.spout.FileSpout"
+    parallelism: 1
+    constructorArgs:
+      - "/data/stormcrawlerfight/"
+      - "top1K2016.txt"
+      - ref: "scheme"
+
   - id: "spout"
     className: "com.digitalpebble.stormcrawler.solr.persistence.SolrSpout"
     parallelism: 1
@@ -92,3 +108,10 @@ streams:
       type: FIELDS
       args: ["url"]
       streamId: "status"
+
+
+  - from: "seeds"
+    to: "status"
+    grouping:
+      type: FIELDS
+      args: ["url"]
