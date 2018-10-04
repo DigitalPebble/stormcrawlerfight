@@ -17,7 +17,7 @@ config:
   # set to 50MB to handle sitemaps
   http.content.limit: 52428800
 
-  partition.url.mode: byDomain
+  partition.url.mode: byHost
 
   # mandatory when using Flux
   topology.kryo.register:
@@ -50,7 +50,7 @@ config:
   # FetcherBolt queue dump : comment out to activate
   # if a file exists on the worker machine with the corresponding port number
   # the FetcherBolt will log the content of its internal queues to the logs
-  # fetcherbolt.queue.debug.filepath: "/tmp/fetcher-dump-{port}
+  # fetcherbolt.queue.debug.filepath: "/tmp/fetcher-dump-{port}"
 
   parsefilters.config.file: "parsefilters.json"
   urlfilters.config.file: "urlfilters.json"
