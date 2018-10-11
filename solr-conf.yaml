@@ -7,7 +7,7 @@ config:
   solr.status.url: "http://localhost:8983/solr/status"
   solr.status.bucket.field: host
   solr.status.bucket.maxsize: 3
-  solr.status.max.results: 100
+  solr.status.max.results: 500
   solr.status.metadata.prefix: metadata
   
   # Solr MetricsConsumer

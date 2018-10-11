@@ -52,6 +52,9 @@ config:
   # the FetcherBolt will log the content of its internal queues to the logs
   # fetcherbolt.queue.debug.filepath: "/tmp/fetcher-dump-{port}"
 
+  http.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
+  https.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
+
   parsefilters.config.file: "parsefilters.json"
   urlfilters.config.file: "urlfilters.json"
 
