@@ -15,7 +15,7 @@ config:
   # does not seem to work?
   # topology.worker.max.heap.size.mb: 2048.0
 
-  fetcher.threads.number: 500
+  fetcher.threads.number: 250
 
   # set to 50MB to handle sitemaps
   http.content.limit: 52428800
@@ -86,5 +86,14 @@ config:
   # fetchInterval.isFeed=true: 10
 
   status.updater.cache.spec: "maximumSize=500000,expireAfterAccess=1h"
+
+  indexer.url.fieldname: "url"
+  indexer.text.fieldname: "content"
+  indexer.canonical.name: "canonical"
+  indexer.md.mapping:
+  - parse.title=title
+  - parse.keywords=keywords
+  - parse.description=description
+  - domain=domain
 
 

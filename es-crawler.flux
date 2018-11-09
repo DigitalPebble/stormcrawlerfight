@@ -15,7 +15,7 @@ includes:
 
 spouts:
   - id: "spout"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.AggregationSpout"
+    className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.CollapsingSpout"
     parallelism: 10
 
   - id: "filespout"
@@ -27,19 +27,6 @@ spouts:
       - ref: "scheme"
 
 components:
-  - id: "WARCFileNameFormat"
-    className: "com.digitalpebble.stormcrawler.warc.WARCFileNameFormat"
-    configMethods:
-      - name: "withPath"
-        args:
-          - "/tmp/warc"
-
-  - id: "rotationPolicy"
-    className: "org.apache.storm.hdfs.bolt.rotation.FileSizeRotationPolicy"
-    constructorArgs:
-      - 50.0
-      - MB
-
   - id: "scheme"
     className: "com.digitalpebble.stormcrawler.util.StringTabScheme"
     constructorArgs:
@@ -62,7 +49,7 @@ bolts:
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 4
   - id: "index"
-    className: "com.digitalpebble.stormcrawler.indexing.DummyIndexer"
+    className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
     parallelism: 2
   - id: "status"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
@@ -70,16 +57,6 @@ bolts:
   - id: "status_metrics"
     className: "com.digitalpebble.stormcrawler.elasticsearch.metrics.StatusMetricsBolt"
     parallelism: 2
-  - id: "warc"
-    className: "com.digitalpebble.stormcrawler.warc.WARCHdfsBolt"
-    parallelism: 2
-    configMethods:
-      - name: "withFileNameFormat"
-        args:
-          - ref: "WARCFileNameFormat"
-      - name: "withRotationPolicy"
-        args:
-          - ref: "rotationPolicy"
 
 streams:
   - from: "spout"
@@ -100,11 +77,6 @@ streams:
 
   - from: "fetcher"
     to: "sitemap"
-    grouping:
-      type: LOCAL_OR_SHUFFLE
-
-  - from: "fetcher"
-    to: "warc"
     grouping:
       type: LOCAL_OR_SHUFFLE
 

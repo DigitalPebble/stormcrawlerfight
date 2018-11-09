@@ -8,6 +8,14 @@ config:
   es.metrics.settings:
     cluster.name: "elasticsearch"
   
+  es.indexer.addresses: "localhost"
+  es.indexer.index.name: "index"
+  # es.indexer.pipeline: "_PIPELINE_"
+  es.indexer.doc.type: "doc"
+  es.indexer.create: false
+  es.indexer.settings:
+    cluster.name: "elasticsearch"
+
   # ES spout and persistence bolt
   es.status.addresses: "localhost"
   es.status.index.name: "status"
@@ -28,7 +36,7 @@ config:
   ################
 
   # time in secs for which the URLs will be considered for fetching after a ack of fail
-  es.status.ttl.purgatory: 30
+  spout.ttl.purgatory: 30
   
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
@@ -43,16 +51,16 @@ config:
   es.status.global.sort.field: "nextFetchDate"
   
   # Delay since previous query date (in secs) after which the nextFetchDate value will be reset
-  es.status.reset.fetchdate.after: 180
-  
-  # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
-  es.status.max.start.offset: 500
+  spout.reset.fetchdate.after: 300
+
+  es.status.recentDate.increase: 10
+  es.status.recentDate.min.gap: 2
   
   # AggregationSpout : sampling improves the performance on large crawls
   es.status.sample: true
   
-  es.status.recentDate.increase: 10
-  es.status.recentDate.min.gap: 2
+  # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
+  es.status.max.start.offset: 500
 
   topology.metrics.consumer.register:
        - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
