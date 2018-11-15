@@ -14,7 +14,7 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 		"index": {
 			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval": "5s"
+			"refresh_interval": "1s"
 		}
 	},
 	"mappings": {
@@ -48,7 +48,7 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 					"type": "keyword",
 					"index": false
 				},
-                                "hostname": {
+                                "key": {
                                         "type": "keyword",
                                         "index": true
                                 }

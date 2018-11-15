@@ -9,7 +9,7 @@ config:
     cluster.name: "elasticsearch"
   
   es.indexer.addresses: "localhost"
-  es.indexer.index.name: "index"
+  es.indexer.index.name: "content"
   # es.indexer.pipeline: "_PIPELINE_"
   es.indexer.doc.type: "doc"
   es.indexer.create: false
@@ -24,7 +24,7 @@ config:
   es.status.routing: true
   # stores the value used for the routing as a separate field
   # needed by the spout implementations
-  es.status.routing.fieldname: "hostname"
+  es.status.routing.fieldname: "key"
   es.status.bulkActions: 500
   es.status.flushInterval: "1s"
   es.status.concurrentRequests: 5
@@ -41,10 +41,10 @@ config:
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
    
-  es.status.max.buckets: 2500
-  es.status.max.urls.per.bucket: 2
+  es.status.max.buckets: 200
+  es.status.max.urls.per.bucket: 3
   # field to group the URLs into buckets
-  es.status.bucket.field: "hostname"
+  es.status.bucket.field: "key"
   # field to sort the URLs within a bucket
   es.status.bucket.sort.field: "nextFetchDate"
   # field to sort the buckets
@@ -57,7 +57,7 @@ config:
   es.status.recentDate.min.gap: 2
   
   # AggregationSpout : sampling improves the performance on large crawls
-  es.status.sample: true
+  es.status.sample: false
   
   # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
   es.status.max.start.offset: 500

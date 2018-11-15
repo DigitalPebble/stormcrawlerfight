@@ -30,7 +30,7 @@
       "name": "HostURLFilter",
       "params": {
         "ignoreOutsideHost": false,
-        "ignoreOutsideDomain": false
+        "ignoreOutsideDomain": true
       }
     },
     {

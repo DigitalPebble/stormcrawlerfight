@@ -1,8 +1,8 @@
-curl -s -XDELETE 'http://localhost:9200/index/' >  /dev/null
+curl -s -XDELETE 'http://localhost:9200/content/' >  /dev/null
  echo ""
-echo "Deleted docs index"
- echo "Creating docs index with mapping"
- curl -s -XPUT localhost:9200/index -H 'Content-Type: application/json' -d '
+echo "Deleted content index"
+ echo "Creating content index with mapping"
+ curl -s -XPUT localhost:9200/content -H 'Content-Type: application/json' -d '
 {
 	"settings": {
 		"index": {
