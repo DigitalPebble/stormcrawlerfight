@@ -24,13 +24,7 @@ spouts:
     constructorArgs:
       - "."
       - "seeds"
-      - ref: "scheme"
-
-components:
-  - id: "scheme"
-    className: "com.digitalpebble.stormcrawler.util.StringTabScheme"
-    constructorArgs:
-      - DISCOVERED
+      - true
 
 bolts:
   - id: "partitioner"
@@ -126,6 +120,7 @@ streams:
   - from: "filespout"
     to: "status"
     grouping:
+      streamId: "status"
       type: CUSTOM
       customClass:
         className: "com.digitalpebble.stormcrawler.util.URLStreamGrouping"

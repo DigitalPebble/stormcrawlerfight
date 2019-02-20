@@ -1,6 +1,9 @@
+ESHOST="http://localhost:9200"
+ESCREDENTIALS="-u elastic:passwordhere"
+
 # deletes and recreates a status index with a bespoke schema
 
-curl -s -XDELETE 'http://localhost:9200/status/' >  /dev/null
+curl $ESCREDENTIALS -s -XDELETE "$ESHOST/status/" >  /dev/null
 
 echo "Deleted status index"
 
@@ -8,7 +11,7 @@ echo "Deleted status index"
 
 echo "Creating status index with mapping"
 
-curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
+curl $ESCREDENTIALS -s -XPUT $ESHOST/status -H 'Content-Type: application/json' -d '
 {
 	"settings": {
 		"index": {
@@ -18,7 +21,6 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 		}
 	},
 	"mappings": {
-		"status": {
 			"dynamic_templates": [{
 				"metadata": {
 					"path_match": "metadata.*",
@@ -47,19 +49,19 @@ curl -XPUT localhost:9200/status -H 'Content-Type: application/json' -d '
 				"url": {
 					"type": "keyword",
 					"index": false
-				},
-                                "key": {
-                                        "type": "keyword",
-                                        "index": true
-                                }
+				},				
+                "key": {
+					"type": "keyword",
+					"index": true
+				}
 			}
-		}
+	
 	}
 }'
 
 # deletes and recreates a status index with a bespoke schema
 
-curl -s -XDELETE 'http://localhost:9200/metrics*/' >  /dev/null
+curl $ESCREDENTIALS -s -XDELETE "$ESHOST/metrics*/" >  /dev/null
 
 echo ""
 echo "Deleted metrics index"
@@ -67,7 +69,7 @@ echo "Deleted metrics index"
 echo "Creating metrics index with mapping"
 
 # http://localhost:9200/metrics/_mapping/status?pretty
-curl -s -XPOST localhost:9200/_template/storm-metrics-template -H 'Content-Type: application/json' -d '
+curl $ESCREDENTIALS -s -XPOST $ESHOST/_template/storm-metrics-template -H 'Content-Type: application/json' -d '
 {
   "template": "metrics*",
   "settings": {
@@ -78,7 +80,6 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -H 'Content-Type:
     "number_of_replicas" : 0
   },
   "mappings": {
-    "datapoint": {
       "_source":         { "enabled": true },
       "properties": {
           "name": {
@@ -104,7 +105,6 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -H 'Content-Type:
             "type": "double"
           }
       }
-    }
   }
 }'
 
