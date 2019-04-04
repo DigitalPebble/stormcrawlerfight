@@ -41,8 +41,8 @@ config:
   # Min time (in msecs) to allow between 2 successive queries to ES
   es.status.min.delay.queries: 1000
    
-  es.status.max.buckets: 200
-  es.status.max.urls.per.bucket: 3
+  es.status.max.buckets: 1000
+  es.status.max.urls.per.bucket: 5
   # field to group the URLs into buckets
   es.status.bucket.field: "key"
   # field to sort the URLs within a bucket
@@ -53,14 +53,16 @@ config:
   # Delay since previous query date (in secs) after which the nextFetchDate value will be reset
   spout.reset.fetchdate.after: 300
 
-  es.status.recentDate.increase: 10
-  es.status.recentDate.min.gap: 2
+  spout.max.delay.queries: 10000
+
+  # es.status.recentDate.increase: 2
+  # es.status.recentDate.min.gap: 2
   
   # AggregationSpout : sampling improves the performance on large crawls
-  es.status.sample: false
+  # es.status.sample: true
   
   # CollapsingSpout : limits the deep paging by resetting the start offset for the ES query 
-  es.status.max.start.offset: 500
+  es.status.max.start.offset: 10
 
   topology.metrics.consumer.register:
        - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"

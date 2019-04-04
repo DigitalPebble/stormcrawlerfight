@@ -103,6 +103,13 @@ streams:
       args: ["url"]
       streamId: "status"
 
+  - from: "feed"
+    to: "status"
+    grouping:
+      type: FIELDS
+      args: ["url"]
+      streamId: "status"
+
   - from: "parse"
     to: "status"
     grouping:

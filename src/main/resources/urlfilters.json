@@ -12,14 +12,14 @@
       "class": "com.digitalpebble.stormcrawler.filtering.depth.MaxDepthFilter",
       "name": "MaxDepthFilter",
       "params": {
-        "maxDepth": 5
+        "maxDepth": 2
       }
     },
     {
       "class": "com.digitalpebble.stormcrawler.filtering.basic.BasicURLNormalizer",
       "name": "BasicURLNormalizer",
       "params": {
-        "removeAnchorPart": true, 
+        "removeAnchorPart": true,
         "unmangleQueryString": true,
         "checkValidURI": false,
         "removeHashes": false
@@ -56,7 +56,14 @@
       "name": "MetadataFilter",
       "params": {
         "isSitemap": "false",
-        "isSeed": "false"
+        "isFeed": "false"
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.filtering.robots.RobotsFilter",
+      "name": "RobotsFilter",
+      "params": {
+        "fromCacheOnly": true
       }
     }
   ]
