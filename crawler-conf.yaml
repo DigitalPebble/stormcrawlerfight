@@ -88,6 +88,8 @@ config:
   # set it to -1 to never refetch a page
   fetchInterval.default: -1
 
+  jsoup.treat.non.html.as.error: false
+
   # revisit a page with a fetch error after 2 hours (value in minutes)
   # set it to -1 to never refetch a page
   fetchInterval.fetch.error: 120

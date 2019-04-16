@@ -42,6 +42,12 @@ bolts:
   - id: "parse"
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 4
+  - id: "shunt"
+    className: "com.digitalpebble.stormcrawler.tika.RedirectionBolt"
+    parallelism: 2
+  - id: "tika"
+    className: "com.digitalpebble.stormcrawler.tika.ParserBolt"
+    parallelism: 4
   - id: "index"
     className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
     parallelism: 2
@@ -85,6 +91,22 @@ streams:
       type: LOCAL_OR_SHUFFLE
 
   - from: "parse"
+    to: "shunt"
+    grouping:
+      type: LOCAL_OR_SHUFFLE
+
+  - from: "shunt"
+    to: "tika"
+    grouping:
+      type: LOCAL_OR_SHUFFLE
+      streamId: "tika"
+
+  - from: "shunt"
+    to: "index"
+    grouping:
+      type: LOCAL_OR_SHUFFLE
+
+  - from: "tika"
     to: "index"
     grouping:
       type: LOCAL_OR_SHUFFLE
@@ -111,6 +133,13 @@ streams:
       streamId: "status"
 
   - from: "parse"
+    to: "status"
+    grouping:
+      type: FIELDS
+      args: ["url"]
+      streamId: "status"
+
+  - from: "tika"
     to: "status"
     grouping:
       type: FIELDS
