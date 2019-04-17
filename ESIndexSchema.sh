@@ -26,6 +26,11 @@ echo "Deleted content index"
 					"index": "true",
 					"store": true
 				},
+				"format": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
 				"keywords": {
 					"type": "keyword",
 					"index": "true",

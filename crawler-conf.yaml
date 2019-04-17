@@ -111,4 +111,5 @@ config:
   - parse.keywords=keywords
   - parse.description=description
   - domain=domain
+  - format=format
 

@@ -25,6 +25,9 @@
        }
     },
     {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.MimeTypeNormalization"
+    },
+    {
       "class": "com.digitalpebble.stormcrawler.parse.filter.CommaSeparatedToMultivaluedMetadata",
       "name": "CommaSeparatedToMultivaluedMetadata",
       "params": {
