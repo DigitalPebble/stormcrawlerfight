@@ -55,7 +55,6 @@
       "class": "com.digitalpebble.stormcrawler.filtering.metadata.MetadataFilter",
       "name": "MetadataFilter",
       "params": {
-        "isSitemap": "false",
         "isFeed": "false"
       }
     },
@@ -65,6 +64,10 @@
       "params": {
         "fromCacheOnly": true
       }
-    }
+    },
+    {
+	   "class": "com.digitalpebble.stormcrawler.filtering.sitemap.SitemapFilter",
+	   "name": "SitemapFilter"
+	}
   ]
 }

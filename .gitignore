@@ -7,3 +7,18 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+target
+.classpath
+.settings
+.project
+
+# Ignore IntelliJ IDEA artifacts
+*.iml
+.idea
+
+# Ignore Netbeans config files
+nbactions.xml
+
+# Ignore OSX system files
+.DS_Store
