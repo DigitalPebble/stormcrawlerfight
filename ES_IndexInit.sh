@@ -21,7 +21,6 @@ curl $ESCREDENTIALS -s -XPUT $ESHOST/status -H 'Content-Type: application/json' 
 		}
 	},
 	"mappings": {
-		"status": {
 			"dynamic_templates": [{
 				"metadata": {
 					"path_match": "metadata.*",
@@ -56,7 +55,6 @@ curl $ESCREDENTIALS -s -XPUT $ESHOST/status -H 'Content-Type: application/json' 
                                         "index": true
                                 }
 			}
-	 	}
 	}
 }'
 
@@ -81,7 +79,6 @@ curl $ESCREDENTIALS -s -XPOST $ESHOST/_template/storm-metrics-template -H 'Conte
     "number_of_replicas" : 0
   },
   "mappings": {
-      "datapoint": {
       "_source":         { "enabled": true },
       "properties": {
           "name": {
@@ -111,6 +108,62 @@ curl $ESCREDENTIALS -s -XPOST $ESHOST/_template/storm-metrics-template -H 'Conte
           }
       }
     }
-  }
 }'
 
+curl $ESCREDENTIALS -s -XDELETE "$ESHOST/content/" >  /dev/null
+
+echo ""
+echo "Deleted content index"
+echo "Creating content index with mapping"
+
+curl $ESCREDENTIALS -s -XPUT $ESHOST/content -H 'Content-Type: application/json' -d '
+{
+	"settings": {
+		"index": {
+			"number_of_shards": 5,
+			"number_of_replicas": 1,
+			"refresh_interval": "60s"
+		}
+	},
+	"mappings": {
+			"_source": {
+				"enabled": false
+			},
+			"properties": {
+				"content": {
+					"type": "text",
+					"index": "true"
+				},
+				"domain": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"format": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"keywords": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"description": {
+					"type": "text",
+					"index": "true",
+					"store": true
+				},
+				"title": {
+					"type": "text",
+					"index": "true",
+					"store": true
+				},
+				"url": {
+					"type": "keyword",
+					"index": "false",
+					"store": true
+				}
+			}
+		}
+}'

@@ -4,14 +4,12 @@ config:
   # ES metricsConsumer
   es.metrics.addresses: "localhost"
   es.metrics.index.name: "metrics"
-  es.metrics.doc.type: "datapoint"
   es.metrics.settings:
     cluster.name: "elasticsearch"
   
   es.indexer.addresses: "localhost"
   es.indexer.index.name: "content"
   # es.indexer.pipeline: "_PIPELINE_"
-  es.indexer.doc.type: "doc"
   es.indexer.create: false
   es.indexer.bulkActions: 100
   es.indexer.flushInterval: "1s"
@@ -22,7 +20,6 @@ config:
   # ES spout and persistence bolt
   es.status.addresses: "localhost"
   es.status.index.name: "status"
-  es.status.doc.type: "status"
   # the routing is done on the value of 'partition.url.mode'
   es.status.routing: true
   # stores the value used for the routing as a separate field
