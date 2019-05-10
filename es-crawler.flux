@@ -26,6 +26,36 @@ spouts:
       - "seeds"
       - true
 
+components:
+  - id: "WARCFileNameFormat"
+    className: "com.digitalpebble.stormcrawler.warc.WARCFileNameFormat"
+    configMethods:
+      - name: "withPath"
+        args:
+          - "/tmp/warc"
+
+  - id: "rotationPolicy"
+    className: "org.apache.storm.hdfs.bolt.rotation.FileSizeRotationPolicy"
+    constructorArgs:
+      - 50.0
+      - MB
+
+  - id: "WARCInfo"
+    className: "java.util.LinkedHashMap"
+    configMethods:
+      - name: "put"
+        args:
+         - "software"
+         - "StormCrawler 1.14 http://stormcrawler.net/"
+      - name: "put"
+        args:
+         - "format"
+         - "WARC File Format 1.0"
+      - name: "put"
+        args:
+         - "conformsTo"
+         - "https://iipc.github.io/warc-specifications/specifications/warc-format/warc-1.0/"
+
 bolts:
   - id: "partitioner"
     className: "com.digitalpebble.stormcrawler.bolt.URLPartitionerBolt"
@@ -42,14 +72,8 @@ bolts:
   - id: "parse"
     className: "com.digitalpebble.stormcrawler.bolt.JSoupParserBolt"
     parallelism: 4
-  - id: "shunt"
-    className: "com.digitalpebble.stormcrawler.tika.RedirectionBolt"
-    parallelism: 2
-  - id: "tika"
-    className: "com.digitalpebble.stormcrawler.tika.ParserBolt"
-    parallelism: 4
   - id: "index"
-    className: "com.digitalpebble.stormcrawler.elasticsearch.bolt.IndexerBolt"
+    className: "com.digitalpebble.stormcrawler.indexing.DummyIndexer"
     parallelism: 2
   - id: "status"
     className: "com.digitalpebble.stormcrawler.elasticsearch.persistence.StatusUpdaterBolt"
@@ -57,6 +81,20 @@ bolts:
   - id: "status_metrics"
     className: "com.digitalpebble.stormcrawler.elasticsearch.metrics.StatusMetricsBolt"
     parallelism: 2
+  - id: "warc"
+    className: "com.digitalpebble.stormcrawler.warc.WARCHdfsBolt"
+    parallelism: 2
+    configMethods:
+      - name: "withFileNameFormat"
+        args:
+          - ref: "WARCFileNameFormat"
+      - name: "withRotationPolicy"
+        args:
+          - ref: "rotationPolicy"
+      - name: "withRequestRecords"
+      - name: "withHeader"
+        args:
+          - ref: "WARCInfo"
 
 streams:
   - from: "spout"
@@ -80,6 +118,11 @@ streams:
     grouping:
       type: LOCAL_OR_SHUFFLE
 
+  - from: "fetcher"
+    to: "warc"
+    grouping:
+      type: LOCAL_OR_SHUFFLE
+
   - from: "sitemap"
     to: "feed"
     grouping:
@@ -91,22 +134,6 @@ streams:
       type: LOCAL_OR_SHUFFLE
 
   - from: "parse"
-    to: "shunt"
-    grouping:
-      type: LOCAL_OR_SHUFFLE
-
-  - from: "shunt"
-    to: "tika"
-    grouping:
-      type: LOCAL_OR_SHUFFLE
-      streamId: "tika"
-
-  - from: "shunt"
-    to: "index"
-    grouping:
-      type: LOCAL_OR_SHUFFLE
-
-  - from: "tika"
     to: "index"
     grouping:
       type: LOCAL_OR_SHUFFLE
@@ -133,13 +160,6 @@ streams:
       streamId: "status"
 
   - from: "parse"
-    to: "status"
-    grouping:
-      type: FIELDS
-      args: ["url"]
-      streamId: "status"
-
-  - from: "tika"
     to: "status"
     grouping:
       type: FIELDS

@@ -109,7 +109,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
-			<artifactId>storm-crawler-tika</artifactId>
+			<artifactId>storm-crawler-warc</artifactId>
 			<version>1.14-SNAPSHOT</version>
 		</dependency>
 		<dependency>

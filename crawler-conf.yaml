@@ -68,6 +68,8 @@ config:
   http.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
   https.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
 
+  http.store.headers: true
+
   robots.cache.spec: "softValues,expireAfterWrite=6h"
 
   # FetcherBolt queue dump : comment out to activate
@@ -115,4 +117,7 @@ config:
   - parse.description=description
   - domain=domain
   - format=format
+
+  warc:
+    fs.file.impl: "org.apache.hadoop.fs.RawLocalFileSystem"
 
