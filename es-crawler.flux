@@ -95,6 +95,9 @@ bolts:
       - name: "withHeader"
         args:
           - ref: "WARCInfo"
+      - name: "withConfigKey"
+        args:
+          - "warc"
 
 streams:
   - from: "spout"
