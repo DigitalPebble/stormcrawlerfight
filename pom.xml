@@ -100,17 +100,17 @@
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-core</artifactId>
-			<version>1.14-SNAPSHOT</version>
+			<version>1.14</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-elasticsearch</artifactId>
-			<version>1.14-SNAPSHOT</version>
+			<version>1.14</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-tika</artifactId>
-			<version>1.14-SNAPSHOT</version>
+			<version>1.14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.storm</groupId>
