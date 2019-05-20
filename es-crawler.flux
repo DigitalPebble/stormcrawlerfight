@@ -56,7 +56,7 @@ bolts:
     parallelism: 4
   - id: "status_metrics"
     className: "com.digitalpebble.stormcrawler.elasticsearch.metrics.StatusMetricsBolt"
-    parallelism: 2
+    parallelism: 1
 
 streams:
   - from: "spout"
