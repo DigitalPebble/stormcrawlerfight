@@ -1,6 +1,9 @@
+ESHOST="http://localhost:9200"
+ESCREDENTIALS="-u elastic:passwordhere"
+
 # deletes and recreates a status index with a bespoke schema
 
-curl -s -XDELETE 'http://localhost:9200/status/' >  /dev/null
+curl $ESCREDENTIALS -s -XDELETE "$ESHOST/status/" >  /dev/null
 
 echo "Deleted status index"
 
@@ -8,30 +11,31 @@ echo "Deleted status index"
 
 echo "Creating status index with mapping"
 
-curl -XPUT localhost:9200/status -d '
+curl $ESCREDENTIALS -s -XPUT $ESHOST/status -H 'Content-Type: application/json' -d '
 {
 	"settings": {
 		"index": {
 			"number_of_shards": 10,
 			"number_of_replicas": 0,
-			"refresh_interval": "5s"
+			"refresh_interval": "1s"
 		}
 	},
 	"mappings": {
-		"status": {
 			"dynamic_templates": [{
 				"metadata": {
 					"path_match": "metadata.*",
 					"match_mapping_type": "string",
 					"mapping": {
-						"type": "keyword"
+						"type": "keyword",
+						"index": false,
+						"doc_values": false
 					}
 				}
 			}],
 			"_source": {
 				"enabled": true
 			},
-			"_all": {
+			"_field_names": {
 				"enabled": false
 			},
 			"properties": {
@@ -43,16 +47,20 @@ curl -XPUT localhost:9200/status -d '
 					"type": "keyword"
 				},
 				"url": {
-					"type": "keyword"
-				}
+					"type": "keyword",
+					"index": false
+				},
+                                "key": {
+                                        "type": "keyword",
+                                        "index": true
+                                }
 			}
-		}
 	}
 }'
 
 # deletes and recreates a status index with a bespoke schema
 
-curl -s -XDELETE 'http://localhost:9200/metrics*/' >  /dev/null
+curl $ESCREDENTIALS -s -XDELETE "$ESHOST/metrics*/" >  /dev/null
 
 echo ""
 echo "Deleted metrics index"
@@ -60,9 +68,9 @@ echo "Deleted metrics index"
 echo "Creating metrics index with mapping"
 
 # http://localhost:9200/metrics/_mapping/status?pretty
-curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
+curl $ESCREDENTIALS -s -XPOST $ESHOST/_template/storm-metrics-template -H 'Content-Type: application/json' -d '
 {
-  "template": "metrics*",
+  "index_patterns": "metrics*",
   "settings": {
     "index": {
       "number_of_shards": 1,
@@ -71,11 +79,12 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
     "number_of_replicas" : 0
   },
   "mappings": {
-    "datapoint": {
-      "_all":            { "enabled": false },
       "_source":         { "enabled": true },
       "properties": {
           "name": {
+            "type": "keyword"
+          },
+          "stormId": {
             "type": "keyword"
           },
           "srcComponentId": {
@@ -99,19 +108,15 @@ curl -s -XPOST localhost:9200/_template/storm-metrics-template -d '
           }
       }
     }
-  }
 }'
 
-# deletes and recreates a doc index with a bespoke schema
-
-curl -s -XDELETE 'http://localhost:9200/index/' >  /dev/null
+curl $ESCREDENTIALS -s -XDELETE "$ESHOST/content/" >  /dev/null
 
 echo ""
-echo "Deleted docs index"
+echo "Deleted content index"
+echo "Creating content index with mapping"
 
-echo "Creating docs index with mapping"
-
-curl -s -XPUT localhost:9200/index -d '
+curl $ESCREDENTIALS -s -XPUT $ESHOST/content -H 'Content-Type: application/json' -d '
 {
 	"settings": {
 		"index": {
@@ -121,11 +126,7 @@ curl -s -XPUT localhost:9200/index -d '
 		}
 	},
 	"mappings": {
-		"doc": {
 			"_source": {
-				"enabled": false
-			},
-			"_all": {
 				"enabled": false
 			},
 			"properties": {
@@ -133,8 +134,23 @@ curl -s -XPUT localhost:9200/index -d '
 					"type": "text",
 					"index": "true"
 				},
-				"host": {
+				"domain": {
 					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"format": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"keywords": {
+					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"description": {
+					"type": "text",
 					"index": "true",
 					"store": true
 				},
@@ -150,6 +166,4 @@ curl -s -XPUT localhost:9200/index -d '
 				}
 			}
 		}
-	}
 }'
-

@@ -79,6 +79,15 @@
 										<exclude>META-INF/*.RSA</exclude>
 									</excludes>
 								</filter>
+								<filter>
+									<!-- https://issues.apache.org/jira/browse/STORM-2428 -->
+									<artifact>org.apache.storm:flux-core</artifact>
+									<excludes>
+										<exclude>org/apache/commons/**</exclude>
+										<exclude>org/apache/http/**</exclude>
+										<exclude>org/yaml/**</exclude>
+									</excludes>
+								</filter>
 							</filters>
 						</configuration>
 					</execution>
@@ -89,25 +98,30 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.digitalpebble.stormcrawler</groupId>
+			<artifactId>storm-crawler-core</artifactId>
+			<version>1.15-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.digitalpebble.stormcrawler</groupId>
+			<artifactId>storm-crawler-elasticsearch</artifactId>
+			<version>1.15-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.digitalpebble.stormcrawler</groupId>
+			<artifactId>storm-crawler-tika</artifactId>
+			<version>1.15-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.storm</groupId>
 			<artifactId>storm-core</artifactId>
-			<version>1.1.0</version>
+			<version>1.2.2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.storm</groupId>
 			<artifactId>flux-core</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.digitalpebble.stormcrawler</groupId>
-			<artifactId>storm-crawler-core</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.digitalpebble.stormcrawler</groupId>
-			<artifactId>storm-crawler-elasticsearch</artifactId>
-			<version>1.6</version>
+			<version>1.2.2</version>
 		</dependency>
 	</dependencies>
 

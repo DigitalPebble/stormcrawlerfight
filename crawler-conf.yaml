@@ -5,14 +5,14 @@
 # This file does not contain all the key values but only the most frequently used ones. See crawler-default.xml for an extensive list.
 
 config: 
-  topology.workers: 1
+  topology.workers: 2
   topology.message.timeout.secs: 300
   topology.max.spout.pending: 250
   topology.debug: false
 
-  worker.heap.memory.mb: 4096
+  topology.worker.childopts: "-Xmx5g -Djava.net.preferIPv4Stack=true"
 
-  fetcher.threads.number: 500
+  fetcher.threads.number: 250
 
   # set to 50MB to handle sitemaps
   http.content.limit: 52428800
@@ -29,7 +29,7 @@ config:
   # metadata.transfer:
   # - customMetadataName
 
-  metadata.track.path: false
+  metadata.track.path: true
   metadata.track.depth: true
 
   # lists the metadata to persist to storage
@@ -41,11 +41,34 @@ config:
    - isSitemap
    - isFeed
 
+  # text extraction for JSoupParserBolt
+  textextractor.include.pattern:
+   - DIV[id="maincontent"]
+   - DIV[itemprop="articleBody"]
+   - ARTICLE
+
+  textextractor.exclude.tags:
+   - STYLE
+   - SCRIPT
+
+  parser.mimetype.whitelist:
+   - application/.+word.*
+   - application/.+excel.*
+   - application/.+powerpoint.*
+   - application/.*pdf.*
+
+  indexer.text.maxlength: 100000
+
   http.agent.name: "DigitalPebble Crawler"
-  http.agent.version: "1.4-SNAPSHOT"
+  http.agent.version: "1.14"
   http.agent.description: "StormCrawler Benchmark"
   http.agent.url: "http://digitalpebble.com/"
   http.agent.email: "crawler@digitalpebble.com"
+
+  http.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
+  https.protocol.implementation: "com.digitalpebble.stormcrawler.protocol.okhttp.HttpProtocol"
+
+  robots.cache.spec: "softValues,expireAfterWrite=6h"
 
   # FetcherBolt queue dump : comment out to activate
   # if a file exists on the worker machine with the corresponding port number
@@ -58,11 +81,17 @@ config:
   sitemap.discovery: true
   sitemap.sniffContent: true
 
-  detect.charset.maxlength: 2048
+  sitemap.schedule.delay: 30
+
+  feed.sniffContent: true
+
+  detect.charset.maxlength: 10000
 
   # revisit a page daily (value in minutes)
   # set it to -1 to never refetch a page
   fetchInterval.default: -1
+
+  jsoup.treat.non.html.as.error: false
 
   # revisit a page with a fetch error after 2 hours (value in minutes)
   # set it to -1 to never refetch a page
@@ -75,8 +104,8 @@ config:
   # and has been fetched succesfully (value in minutes)
   # fetchInterval.isFeed=true: 10
 
-  # configuration for the classes extending AbstractIndexerBolt
-  # indexer.md.filter: "someKey=aValue"
+  status.updater.cache.spec: "maximumSize=500000,expireAfterAccess=1h"
+
   indexer.url.fieldname: "url"
   indexer.text.fieldname: "content"
   indexer.canonical.name: "canonical"
@@ -84,12 +113,6 @@ config:
   - parse.title=title
   - parse.keywords=keywords
   - parse.description=description
-  - host=host
-
-  status.updater.cache.spec: "maximumSize=500000,expireAfterAccess=1h"
-
-  # Metrics consumers:
-  topology.metrics.consumer.register:
-     - class: "com.digitalpebble.stormcrawler.elasticsearch.metrics.MetricsConsumer"
-       parallelism.hint: 1
+  - domain=domain
+  - format=format
 
