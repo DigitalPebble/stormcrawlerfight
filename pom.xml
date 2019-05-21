@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.digitalpebble.stormcrawler</groupId>
@@ -13,6 +15,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<stormcrawler.version>1.15-SNAPSHOT</stormcrawler.version>
 	</properties>
 
 	<build>
@@ -63,8 +66,8 @@
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>org.apache.storm.flux.Flux</mainClass>
 									<manifestEntries>
-									    <Change></Change>
-									    <Build-Date></Build-Date>
+										<Change></Change>
+										<Build-Date></Build-Date>
 									</manifestEntries>
 								</transformer>
 							</transformers>
@@ -100,17 +103,22 @@
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-core</artifactId>
-			<version>1.15-SNAPSHOT</version>
+			<version>${stormcrawler.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-elasticsearch</artifactId>
-			<version>1.15-SNAPSHOT</version>
+			<version>${stormcrawler.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digitalpebble.stormcrawler</groupId>
 			<artifactId>storm-crawler-tika</artifactId>
-			<version>1.15-SNAPSHOT</version>
+			<version>${stormcrawler.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.digitalpebble.stormcrawler</groupId>
+			<artifactId>storm-crawler-langid</artifactId>
+			<version>${stormcrawler.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.storm</groupId>

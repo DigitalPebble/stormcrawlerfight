@@ -50,10 +50,10 @@ curl $ESCREDENTIALS -s -XPUT $ESHOST/status -H 'Content-Type: application/json' 
 					"type": "keyword",
 					"index": false
 				},
-                                "key": {
-                                        "type": "keyword",
-                                        "index": true
-                                }
+				"key": {
+				        "type": "keyword",
+				        "index": true
+				}
 			}
 	}
 }'
@@ -146,6 +146,11 @@ curl $ESCREDENTIALS -s -XPUT $ESHOST/content -H 'Content-Type: application/json'
 				},
 				"keywords": {
 					"type": "keyword",
+					"index": "true",
+					"store": true
+				},
+				"lang": {
+					"type": "text",
 					"index": "true",
 					"store": true
 				},

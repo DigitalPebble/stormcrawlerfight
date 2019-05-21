@@ -6,14 +6,15 @@
       "params": {
         "canonical": "//*[@rel=\"canonical\"]/@href",
         "parse.description": [
-            "//*[@name=\"description\"]/@content",
-            "//*[@name=\"Description\"]/@content"
-         ],
+          "//*[@name=\"description\"]/@content",
+          "//*[@name=\"Description\"]/@content"
+        ],
         "parse.title": [
-            "//TITLE",
-            "//META[@name=\"title\"]/@content"
-         ],
-         "parse.keywords": "//META[@name=\"keywords\"]/@content"
+          "//TITLE",
+          "//META[@name=\"title\"]/@content"
+        ],
+        "parse.lang": "/HTML/@lang",
+        "parse.keywords": "//META[@name=\"keywords\"]/@content"
       }
     },
     {
@@ -22,7 +23,16 @@
       "params": {
         "key": "domain",
         "byHost": false
-       }
+      }
+    },
+    {
+      "class": "com.digitalpebble.stormcrawler.parse.filter.LanguageID",
+      "name": "LanguageID",
+      "params": {
+        "key": "lang",
+        "md.skip": "parse.lang",
+        "minProb": 0.66
+      }
     },
     {
       "class": "com.digitalpebble.stormcrawler.parse.filter.MimeTypeNormalization"
@@ -31,8 +41,10 @@
       "class": "com.digitalpebble.stormcrawler.parse.filter.CommaSeparatedToMultivaluedMetadata",
       "name": "CommaSeparatedToMultivaluedMetadata",
       "params": {
-        "keys": ["parse.keywords"]
-       }
+        "keys": [
+          "parse.keywords"
+        ]
+      }
     }
   ]
 }
