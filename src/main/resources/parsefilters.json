@@ -30,7 +30,7 @@
       "name": "LanguageID",
       "params": {
         "key": "lang",
-        "md.skip": "parse.lang",
+        "extracted": "parse.lang",
         "minProb": 0.66
       }
     },

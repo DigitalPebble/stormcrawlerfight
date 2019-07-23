@@ -113,7 +113,6 @@ config:
   - parse.title=title
   - parse.keywords=keywords
   - parse.description=description
-  - parse.lang=lang
   - lang=lang
   - domain=domain
   - format=format
