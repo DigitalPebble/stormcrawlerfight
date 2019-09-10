@@ -13,6 +13,8 @@ config:
   topology.worker.childopts: "-Xmx5g -Djava.net.preferIPv4Stack=true"
 
   fetcher.threads.number: 250
+  
+  fetcher.timeout.queue: 300
 
   # set to 50MB to handle sitemaps
   http.content.limit: 52428800
