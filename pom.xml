@@ -15,7 +15,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stormcrawler.version>1.15-SNAPSHOT</stormcrawler.version>
+		<stormcrawler.version>1.15</stormcrawler.version>
 	</properties>
 
 	<build>
